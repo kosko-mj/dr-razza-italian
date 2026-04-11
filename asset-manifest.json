@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/dr-razza-italian/static/css/main.626b2471.css",
+    "main.js": "/dr-razza-italian/static/js/main.645074db.js",
+    "static/js/453.825386d9.chunk.js": "/dr-razza-italian/static/js/453.825386d9.chunk.js",
+    "index.html": "/dr-razza-italian/index.html",
+    "main.626b2471.css.map": "/dr-razza-italian/static/css/main.626b2471.css.map",
+    "main.645074db.js.map": "/dr-razza-italian/static/js/main.645074db.js.map",
+    "453.825386d9.chunk.js.map": "/dr-razza-italian/static/js/453.825386d9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.626b2471.css",
+    "static/js/main.645074db.js"
+  ]
+}
