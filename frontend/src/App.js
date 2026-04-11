@@ -1,5 +1,7 @@
 import "./App.css";
+import InquiryForm from "./Components/InquiryForm";
 import Footer from "./Components/Footer";
+
 
 function App() {
   const todayEvent = {
@@ -140,6 +142,9 @@ function App() {
           </a>
         </div>
       </section>
+
+      {/* Inquiry Form */}
+      <InquiryForm />
 
       <footer className="footer">
         <div className="footer-brand">DR RAZZA GOUL'S ITALIAN SPECIALTIES</div>
