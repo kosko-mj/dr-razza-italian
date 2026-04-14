@@ -43,4 +43,22 @@ router.delete('/:id', (req, res) => {
   });
 });
 
+// PUT - update an event
+router.put('/:id', (req, res) => {
+  const { id } = req.params;
+  const { date, time, venue, address, notes } = req.body;
+  
+  db.run(
+    `UPDATE events SET date = ?, time = ?, venue = ?, address = ?, notes = ? WHERE id = ?`,
+    [date, time, venue, address, notes, id],
+    function(err) {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({ message: 'Event updated successfully' });
+    }
+  );
+});
+
 module.exports = router;
