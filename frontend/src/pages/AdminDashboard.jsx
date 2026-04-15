@@ -1,42 +1,14 @@
 import { useState, useEffect } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import './AdminDashboard.css';
-
-// Date parser - handles multiple formats
-const parseDate = (dateString) => {
-  // Already formatted as "April 14, 2026"
-  if (dateString.match(/[A-Za-z]+\s\d{1,2},\s\d{4}/)) {
-    return new Date(dateString);
-  }
-  // Handle MM/DD/YYYY
-  if (dateString.match(/\d{1,2}\/\d{1,2}\/\d{4}/)) {
-    const [month, day, year] = dateString.split('/');
-    return new Date(year, month - 1, day);
-  }
-  // Handle YYYY-MM-DD
-  if (dateString.match(/\d{4}-\d{1,2}-\d{1,2}/)) {
-    return new Date(dateString);
-  }
-  // Fallback
-  return new Date(dateString);
-};
-
-// Format date for display
-const formatDateForDisplay = (dateString) => {
-  const date = parseDate(dateString);
-  if (isNaN(date.getTime())) return dateString;
-  return date.toLocaleDateString('en-US', { 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
-  });
-};
 
 function AdminDashboard() {
   const [events, setEvents] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [editingEvent, setEditingEvent] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
   const [formData, setFormData] = useState({
-    date: '',
     time: '',
     venueName: '',
     venueAddress: '',
@@ -72,7 +44,11 @@ function AdminDashboard() {
     e.preventDefault();
     
     const notes = formData.menuItems.filter(item => item.trim() !== '').join('\n');
-    const displayDate = formatDateForDisplay(formData.date);
+    const displayDate = selectedDate ? selectedDate.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    }) : '';
     
     const eventData = {
       date: displayDate,
@@ -95,7 +71,8 @@ function AdminDashboard() {
       fetchEvents();
       setShowForm(false);
       setEditingEvent(null);
-      setFormData({ date: '', time: '', venueName: '', venueAddress: '', menuItems: [''] });
+      setSelectedDate(null);
+      setFormData({ time: '', venueName: '', venueAddress: '', menuItems: [''] });
     });
   };
 
@@ -109,8 +86,8 @@ function AdminDashboard() {
   const handleEdit = (event) => {
     setEditingEvent(event);
     const menuItems = event.notes ? event.notes.split('\n') : [''];
+    setSelectedDate(new Date(event.date));
     setFormData({
-      date: event.date,
       time: event.time,
       venueName: event.venue,
       venueAddress: event.address,
@@ -125,7 +102,8 @@ function AdminDashboard() {
         <h1>Event Manager</h1>
         <button onClick={() => { 
           setEditingEvent(null); 
-          setFormData({ date: '', time: '', venueName: '', venueAddress: '', menuItems: [''] }); 
+          setSelectedDate(null);
+          setFormData({ time: '', venueName: '', venueAddress: '', menuItems: [''] }); 
           setShowForm(true); 
         }} className="btn-add-event">
           + Add Event
@@ -139,11 +117,12 @@ function AdminDashboard() {
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label>Date</label>
-                <input
-                  type="text"
-                  placeholder="April 15, 2026 or 04/15/2026"
-                  value={formData.date}
-                  onChange={(e) => setFormData({...formData, date: e.target.value})}
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={(date) => setSelectedDate(date)}
+                  dateFormat="MMMM d, yyyy"
+                  placeholderText="Select a date"
+                  className="date-picker-input"
                   required
                 />
               </div>

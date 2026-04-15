@@ -211,3 +211,17 @@
 .form-buttons button:hover {
   opacity: 0.8;
 }
+
+.date-picker-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #E0D5C0;
+  font-family: 'Oswald', sans-serif;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
