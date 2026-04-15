@@ -225,3 +225,148 @@
 .react-datepicker-wrapper {
   width: 100%;
 }
+
+/* Tab Navigation */
+.admin-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #E0D5C0;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 12px 24px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  color: #888;
+  transition: all 0.2s;
+}
+
+.tab-btn.active {
+  color: #A52A2A;
+  border-bottom: 2px solid #A52A2A;
+}
+
+.tab-btn:hover {
+  color: #A52A2A;
+}
+
+.events-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+/* Inquiries Layout */
+.inquiries-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.inquiries-list {
+  border-right: 1px solid #E0D5C0;
+  padding-right: 24px;
+}
+
+.inquiry-detail {
+  padding-left: 24px;
+}
+
+.inquiry-detail h3 {
+  color: #A52A2A;
+  margin-bottom: 16px;
+}
+
+.inquiry-info {
+  margin-bottom: 24px;
+}
+
+.inquiry-info p {
+  margin: 8px 0;
+}
+
+.inquiry-message {
+  background: #F5F0E8;
+  padding: 16px;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.reply-section {
+  margin-top: 24px;
+}
+
+.reply-section label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #A52A2A;
+}
+
+.reply-section textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #E0D5C0;
+  font-family: 'Oswald', sans-serif;
+  margin-bottom: 16px;
+}
+
+.reply-section button {
+  background: #2E5C2E;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: 'Oswald', sans-serif;
+}
+
+.reply-section button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.reply-success {
+  color: #2E5C2E;
+  margin-top: 12px;
+}
+
+.reply-note {
+  color: #888;
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+.no-selection {
+  text-align: center;
+  color: #888;
+  padding: 40px;
+}
+
+.badge-new {
+  background: #A52A2A;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+.badge-replied {
+  background: #2E5C2E;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+.admin-table tr.selected {
+  background: #F5F0E8;
+}
+
+.admin-table tr {
+  cursor: pointer;
+}

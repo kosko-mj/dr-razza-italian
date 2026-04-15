@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 
 // Import routes
 const eventsRoutes = require('./routes/events');
+const contactsRoutes = require('./routes/contacts');
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/events', eventsRoutes);
+app.use('/api/contacts', contactsRoutes);
 
 // Test route
 app.get('/api/health', (req, res) => {

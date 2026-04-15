@@ -20,6 +20,21 @@ db.serialize(() => {
     )
   `);
 
+  // Add contacts table after events table
+    db.run(`
+    CREATE TABLE IF NOT EXISTS contacts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        venue TEXT NOT NULL,
+        preferred_date TEXT,
+        message TEXT,
+        status TEXT DEFAULT 'new',
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        replied_at DATETIME
+    )
+    `);
+
  // Insert sample data if table is empty
  db.get(`SELECT COUNT(*) as count FROM events`, (err, row) => {
     if (row.count === 0) {

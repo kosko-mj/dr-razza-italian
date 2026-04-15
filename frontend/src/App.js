@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import InquiryForm from './Components/InquiryForm';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
+import Inquiries from './pages/Inquiries';
 import './App.css';
 
 function PublicSite() {

@@ -5,7 +5,7 @@ function InquiryForm() {
     name: '',
     email: '',
     venue: '',
-    date: '',
+    preferred_date: '',
     message: ''
   });
   const [status, setStatus] = useState('');
@@ -18,15 +18,24 @@ function InquiryForm() {
     e.preventDefault();
     setStatus('sending');
     
-    // TODO: Connect to backend API
-    console.log('Form submitted:', formData);
-    
-    // Simulate success
-    setTimeout(() => {
-      setStatus('success');
-      setFormData({ name: '', email: '', venue: '', date: '', message: '' });
-      setTimeout(() => setStatus(''), 3000);
-    }, 500);
+    try {
+      const response = await fetch('http://localhost:5000/api/contacts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', venue: '', preferred_date: '', message: '' });
+        setTimeout(() => setStatus(''), 3000);
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setStatus('error');
+    }
   };
 
   return (
@@ -35,7 +44,7 @@ function InquiryForm() {
       <div className="section-divider"></div>
       <p className="inquiry-intro">
         Want Dr. Razza Goul's at your bar, brewery, or event?<br />
-        Fill out the form and we'll be in touch.
+        Fill out the form and we'll be in touch within 24 hours.
       </p>
       
       <form className="inquiry-form" onSubmit={handleSubmit}>
@@ -69,16 +78,16 @@ function InquiryForm() {
           />
           <input
             type="text"
-            name="date"
+            name="preferred_date"
             placeholder="Preferred date (e.g., June 2026)"
-            value={formData.date}
+            value={formData.preferred_date}
             onChange={handleChange}
           />
         </div>
         
         <textarea
           name="message"
-          placeholder="Anything else? (guest count, budget, special requests...)"
+          placeholder="Tell us about your event (guest count, budget, special requests...)"
           rows="4"
           value={formData.message}
           onChange={handleChange}
@@ -89,7 +98,10 @@ function InquiryForm() {
         </button>
         
         {status === 'success' && (
-          <p className="form-success">Thanks! We'll get back to you soon.</p>
+          <p className="form-success">Thanks! We'll be in touch soon.</p>
+        )}
+        {status === 'error' && (
+          <p className="form-error">Something went wrong. Please try again.</p>
         )}
       </form>
     </section>

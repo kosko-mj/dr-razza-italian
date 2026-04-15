@@ -453,3 +453,11 @@ body {
 .kosko-footer i {
   font-size: 0.55rem;
 }
+
+.form-error {
+  text-align: center;
+  color: #A52A2A;
+  font-family: 'Oswald', sans-serif;
+  font-size: 14px;
+  margin-top: 16px;
+}
