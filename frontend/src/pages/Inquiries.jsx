@@ -37,11 +37,7 @@ function Inquiries() {
   };
 
   return (
-    <div className="admin-container">
-      <div className="admin-header">
-        <h1>Inquiries</h1>
-      </div>
-
+    <div className="inquiries-container">
       <div className="inquiries-layout">
         {/* Inquiries List */}
         <div className="inquiries-list">
@@ -52,7 +48,7 @@ function Inquiries() {
                 <th>Name</th>
                 <th>Venue</th>
                 <th>Status</th>
-               </tr>
+              </tr>
             </thead>
             <tbody>
               {inquiries.map(inquiry => (

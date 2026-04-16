@@ -1,80 +1,51 @@
+/* AdminDashboard.css - Clean White Version */
+
+/* Base Layout */
 .admin-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 24px;
-  font-family: 'Oswald', sans-serif;
-  background: #F9F2E0;
-  min-height: 100vh;
+  width: 100%;
 }
 
-.admin-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px;
-  padding-bottom: 16px;
-  border-bottom: 2px solid #A52A2A;
-}
-
-.admin-header h1 {
-  color: #A52A2A;
-  font-size: 28px;
-  font-weight: 300;
-  letter-spacing: 2px;
-  margin: 0;
-}
-
-.btn-add-event {
-  background: #2E5C2E;
-  color: white;
-  border: none;
-  padding: 10px 24px;
-  cursor: pointer;
-  font-family: 'Oswald', sans-serif;
-  font-size: 14px;
-  letter-spacing: 1px;
-  transition: background 0.2s;
-}
-
-.btn-add-event:hover {
-  background: #1e3f1e;
-}
-
+/* Tables */
 .admin-table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .admin-table th {
-  background: #A52A2A;
-  color: white;
-  padding: 14px 12px;
   text-align: left;
-  font-weight: 400;
-  letter-spacing: 1px;
+  padding: 12px 8px;
+  border-bottom: 2px solid #E0D5C0;
+  color: #A52A2A;
+  font-weight: 500;
 }
 
 .admin-table td {
-  padding: 12px;
-  border-bottom: 1px solid #E0D5C0;
+  padding: 12px 8px;
+  border-bottom: 1px solid #F0E8D8;
   color: #333;
 }
 
 .admin-table tr:hover {
-  background: #F5F0E8;
+  background: #FAF7F2;
 }
 
+.admin-table tr {
+  cursor: pointer;
+}
+
+.admin-table tr.selected {
+  background: #FAF7F2;
+}
+
+/* Buttons - Pill Style */
 .btn-edit, .btn-delete {
-  padding: 4px 12px;
+  padding: 4px 16px;
   margin: 0 4px;
   cursor: pointer;
   border: none;
-  border-radius: 2px;
+  border-radius: 40px;
   font-family: 'Oswald', sans-serif;
   font-size: 12px;
-  transition: opacity 0.2s;
 }
 
 .btn-edit {
@@ -83,185 +54,43 @@
 }
 
 .btn-delete {
-  background: #888;
+  background: #999;
   color: white;
 }
 
-.btn-edit:hover, .btn-delete:hover {
-  opacity: 0.8;
-}
-
-.admin-form-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.admin-form {
-  background: white;
-  padding: 32px;
-  max-width: 550px;
-  width: 90%;
-  max-height: 90vh;
-  overflow-y: auto;
-  border-top: 4px solid #A52A2A;
-}
-
-.admin-form h2 {
-  color: #A52A2A;
-  margin-bottom: 24px;
-  font-weight: 300;
-  letter-spacing: 1px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 500;
-  color: #A52A2A;
-  font-size: 13px;
-  letter-spacing: 0.5px;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #E0D5C0;
-  font-family: 'Oswald', sans-serif;
-  font-size: 14px;
-  transition: border 0.2s;
-}
-
-.form-group input:focus {
-  outline: none;
-  border-color: #A52A2A;
-}
-
-.menu-item-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.menu-item-row input {
-  flex: 1;
-}
-
-.btn-remove {
-  background: #A52A2A;
+.btn-add-event {
+  background: #2D4A2D;
   color: white;
   border: none;
-  width: 36px;
-  border-radius: 2px;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.btn-add-item {
-  background: #2E5C2E;
-  color: white;
-  border: none;
-  padding: 6px 16px;
-  border-radius: 2px;
-  cursor: pointer;
-  margin-top: 8px;
-  font-family: 'Oswald', sans-serif;
-  font-size: 12px;
-}
-
-.form-buttons {
-  display: flex;
-  gap: 12px;
-  margin-top: 28px;
-}
-
-.form-buttons button {
-  flex: 1;
-  padding: 10px;
+  padding: 10px 24px;
+  border-radius: 40px;
   cursor: pointer;
   font-family: 'Oswald', sans-serif;
   font-size: 14px;
-  letter-spacing: 1px;
-  transition: opacity 0.2s;
 }
 
-.form-buttons button[type="submit"] {
-  background: #A52A2A;
-  color: white;
-  border: none;
+.btn-add-event:hover {
+  background: #1e3f1e;
 }
 
-.form-buttons button[type="button"] {
-  background: transparent;
-  border: 1px solid #ccc;
-  color: #666;
-}
-
-.form-buttons button:hover {
-  opacity: 0.8;
-}
-
-.date-picker-input {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #E0D5C0;
-  font-family: 'Oswald', sans-serif;
-  font-size: 14px;
-  background: white;
-  cursor: pointer;
-}
-
-.react-datepicker-wrapper {
-  width: 100%;
-}
-
-/* Tab Navigation */
-.admin-tabs {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 24px;
-  border-bottom: 1px solid #E0D5C0;
-}
-
-.tab-btn {
-  background: none;
-  border: none;
-  padding: 12px 24px;
-  font-family: 'Oswald', sans-serif;
-  font-size: 16px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  color: #888;
-  transition: all 0.2s;
-}
-
-.tab-btn.active {
-  color: #A52A2A;
-  border-bottom: 2px solid #A52A2A;
-}
-
-.tab-btn:hover {
-  color: #A52A2A;
-}
-
+/* Events Tab */
 .events-header {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
-/* Inquiries Layout */
+.admin-table th:last-child,
+.admin-table td:last-child {
+  text-align: right;
+  width: 120px;
+}
+
+.admin-table td:last-child {
+  white-space: nowrap;
+}
+
+/* Inquiries Tab */
 .inquiries-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -279,22 +108,21 @@
 
 .inquiry-detail h3 {
   color: #A52A2A;
-  margin-bottom: 16px;
-}
-
-.inquiry-info {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  font-size: 20px;
 }
 
 .inquiry-info p {
   margin: 8px 0;
+  color: #444;
 }
 
 .inquiry-message {
-  background: #F5F0E8;
+  background: #FAF7F2;
   padding: 16px;
-  border-radius: 4px;
+  border-radius: 8px;
   margin-top: 8px;
+  line-height: 1.5;
 }
 
 .reply-section {
@@ -312,15 +140,18 @@
   width: 100%;
   padding: 12px;
   border: 1px solid #E0D5C0;
+  border-radius: 8px;
   font-family: 'Oswald', sans-serif;
   margin-bottom: 16px;
+  resize: vertical;
 }
 
 .reply-section button {
-  background: #2E5C2E;
+  background: #2D4A2D;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 24px;
+  border-radius: 40px;
   cursor: pointer;
   font-family: 'Oswald', sans-serif;
 }
@@ -331,7 +162,7 @@
 }
 
 .reply-success {
-  color: #2E5C2E;
+  color: #2D4A2D;
   margin-top: 12px;
 }
 
@@ -343,30 +174,180 @@
 
 .no-selection {
   text-align: center;
-  color: #888;
-  padding: 40px;
+  color: #999;
+  padding: 60px 20px;
 }
 
+/* Badges */
 .badge-new {
   background: #A52A2A;
   color: white;
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 11px;
+  display: inline-block;
 }
 
 .badge-replied {
-  background: #2E5C2E;
+  background: #2D4A2D;
   color: white;
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 11px;
+  display: inline-block;
 }
 
-.admin-table tr.selected {
-  background: #F5F0E8;
+/* Analytics Placeholder */
+.analytics-placeholder {
+  text-align: center;
+  padding: 60px 20px;
 }
 
-.admin-table tr {
+.analytics-placeholder h3 {
+  color: #A52A2A;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.analytics-placeholder p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.analytics-placeholder ul {
+  list-style: none;
+  padding: 0;
+  display: inline-block;
+  text-align: left;
+}
+
+.analytics-placeholder li {
+  padding: 8px 0;
+  color: #666;
+}
+
+/* Form Modal */
+.admin-form-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.admin-form {
+  background: white;
+  padding: 32px;
+  max-width: 550px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.admin-form h2 {
+  color: #A52A2A;
+  margin-bottom: 24px;
+  font-size: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #A52A2A;
+  font-size: 13px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #E0D5C0;
+  border-radius: 6px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 14px;
+}
+
+.menu-item-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.menu-item-row input {
+  flex: 1;
+}
+
+.btn-remove {
+  background: #A52A2A;
+  color: white;
+  border: none;
+  width: 36px;
+  border-radius: 40px;
   cursor: pointer;
+  font-size: 18px;
+}
+
+.btn-add-item {
+  background: #2D4A2D;
+  color: white;
+  border: none;
+  padding: 6px 20px;
+  border-radius: 40px;
+  cursor: pointer;
+  margin-top: 8px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.form-buttons button {
+  flex: 1;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: 'Oswald', sans-serif;
+  font-size: 14px;
+  border-radius: 40px;
+}
+
+.form-buttons button[type="submit"] {
+  background: #A52A2A;
+  color: white;
+  border: none;
+}
+
+.form-buttons button[type="button"] {
+  background: transparent;
+  border: 1px solid #ccc;
+  color: #666;
+}
+
+/* Date Picker */
+.date-picker-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #E0D5C0;
+  border-radius: 6px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
 }

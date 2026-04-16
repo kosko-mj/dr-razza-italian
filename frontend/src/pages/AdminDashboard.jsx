@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Inquiries from './Inquiries';
+import AdminLayout from '../Components/AdminLayout';
 import './AdminDashboard.css';
 
-function AdminDashboard() {
+function AdminDashboard({ onLogout }) {
   const [activeTab, setActiveTab] = useState('events');
   const [events, setEvents] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -98,154 +99,148 @@ function AdminDashboard() {
     setShowForm(true);
   };
 
-  return (
-    <div className="admin-container">
-      <div className="admin-header">
-        <h1>Admin Dashboard</h1>
-      </div>
-      
-      {/* Tab Navigation */}
-      <div className="admin-tabs">
-        <button 
-          className={`tab-btn ${activeTab === 'events' ? 'active' : ''}`}
-          onClick={() => setActiveTab('events')}
-        >
-          Events
-        </button>
-        <button 
-          className={`tab-btn ${activeTab === 'inquiries' ? 'active' : ''}`}
-          onClick={() => setActiveTab('inquiries')}
-        >
-          Inquiries
+  // Events Tab Content
+  const EventsContent = () => (
+    <>
+      <div className="events-header">
+        <button onClick={() => { 
+          setEditingEvent(null); 
+          setSelectedDate(null);
+          setFormData({ time: '', venueName: '', venueAddress: '', menuItems: [''] }); 
+          setShowForm(true); 
+        }} className="btn-add-event">
+          + Add Event
         </button>
       </div>
 
-      {/* Events Tab */}
-      {activeTab === 'events' && (
-        <div className="tab-content">
-          <div className="events-header">
-            <button onClick={() => { 
-              setEditingEvent(null); 
-              setSelectedDate(null);
-              setFormData({ time: '', venueName: '', venueAddress: '', menuItems: [''] }); 
-              setShowForm(true); 
-            }} className="btn-add-event">
-              + Add Event
-            </button>
-          </div>
-
-          {showForm && (
-            <div className="admin-form-modal">
-              <div className="admin-form">
-                <h2>{editingEvent ? 'Edit Event' : 'New Event'}</h2>
-                <form onSubmit={handleSubmit}>
-                  <div className="form-group">
-                    <label>Date</label>
-                    <DatePicker
-                      selected={selectedDate}
-                      onChange={(date) => setSelectedDate(date)}
-                      dateFormat="MMMM d, yyyy"
-                      placeholderText="Select a date"
-                      className="date-picker-input"
-                      required
-                    />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label>Time</label>
-                    <input
-                      type="text"
-                      placeholder="6pm - 10pm"
-                      value={formData.time}
-                      onChange={(e) => setFormData({...formData, time: e.target.value})}
-                      required
-                    />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label>Venue Name</label>
-                    <input
-                      type="text"
-                      placeholder="The Richardson"
-                      value={formData.venueName}
-                      onChange={(e) => setFormData({...formData, venueName: e.target.value})}
-                      required
-                    />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label>Venue Address</label>
-                    <input
-                      type="text"
-                      placeholder="Greenpoint, Brooklyn"
-                      value={formData.venueAddress}
-                      onChange={(e) => setFormData({...formData, venueAddress: e.target.value})}
-                      required
-                    />
-                  </div>
-                  
-                  <div className="form-group">
-                    <label>Menu Items</label>
-                    {formData.menuItems.map((item, index) => (
-                      <div key={index} className="menu-item-row">
-                        <input
-                          type="text"
-                          placeholder={`Item ${index + 1}`}
-                          value={item}
-                          onChange={(e) => updateMenuItem(index, e.target.value)}
-                        />
-                        {formData.menuItems.length > 1 && (
-                          <button type="button" onClick={() => removeMenuItem(index)} className="btn-remove">×</button>
-                        )}
-                      </div>
-                    ))}
-                    <button type="button" onClick={addMenuItem} className="btn-add-item">+ Add Menu Item</button>
-                  </div>
-                  
-                  <div className="form-buttons">
-                    <button type="submit">Save Event</button>
-                    <button type="button" onClick={() => { setShowForm(false); setEditingEvent(null); }}>Cancel</button>
-                  </div>
-                </form>
+      {showForm && (
+        <div className="admin-form-modal">
+          <div className="admin-form">
+            <h2>{editingEvent ? 'Edit Event' : 'New Event'}</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label>Date</label>
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={(date) => setSelectedDate(date)}
+                  dateFormat="MMMM d, yyyy"
+                  placeholderText="Select a date"
+                  className="date-picker-input"
+                  required
+                />
               </div>
-            </div>
-          )}
-
-          <table className="admin-table">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Venue</th>
-                <th>Address</th>
-                <th>Time</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {events.map(event => (
-                <tr key={event.id}>
-                  <td>{event.date}</td>
-                  <td>{event.venue}</td>
-                  <td>{event.address}</td>
-                  <td>{event.time}</td>
-                  <td>
-                    <button onClick={() => handleEdit(event)} className="btn-edit">Edit</button>
-                    <button onClick={() => handleDelete(event.id)} className="btn-delete">Delete</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+              
+              <div className="form-group">
+                <label>Time</label>
+                <input
+                  type="text"
+                  placeholder="6pm - 10pm"
+                  value={formData.time}
+                  onChange={(e) => setFormData({...formData, time: e.target.value})}
+                  required
+                />
+              </div>
+              
+              <div className="form-group">
+                <label>Venue Name</label>
+                <input
+                  type="text"
+                  placeholder="The Richardson"
+                  value={formData.venueName}
+                  onChange={(e) => setFormData({...formData, venueName: e.target.value})}
+                  required
+                />
+              </div>
+              
+              <div className="form-group">
+                <label>Venue Address</label>
+                <input
+                  type="text"
+                  placeholder="Greenpoint, Brooklyn"
+                  value={formData.venueAddress}
+                  onChange={(e) => setFormData({...formData, venueAddress: e.target.value})}
+                  required
+                />
+              </div>
+              
+              <div className="form-group">
+                <label>Menu Items</label>
+                {formData.menuItems.map((item, index) => (
+                  <div key={index} className="menu-item-row">
+                    <input
+                      type="text"
+                      placeholder={`Item ${index + 1}`}
+                      value={item}
+                      onChange={(e) => updateMenuItem(index, e.target.value)}
+                    />
+                    {formData.menuItems.length > 1 && (
+                      <button type="button" onClick={() => removeMenuItem(index)} className="btn-remove">×</button>
+                    )}
+                  </div>
+                ))}
+                <button type="button" onClick={addMenuItem} className="btn-add-item">+ Add Menu Item</button>
+              </div>
+              
+              <div className="form-buttons">
+                <button type="submit">Save Event</button>
+                <button type="button" onClick={() => { setShowForm(false); setEditingEvent(null); }}>Cancel</button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
 
-      {/* Inquiries Tab */}
-      {activeTab === 'inquiries' && (
-        <div className="tab-content">
-          <Inquiries />
-        </div>
-      )}
+      <table className="admin-table">
+        <thead>
+            <tr>
+            <th>Date</th>
+            <th>Venue</th>
+            <th>Time</th>
+            <th>Address</th>
+            <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {events.map(event => (
+            <tr key={event.id}>
+                <td>{event.date}</td>
+                <td>{event.venue}</td>
+                <td>{event.time}</td>
+                <td>{event.address}</td>
+                <td>
+                <button onClick={() => handleEdit(event)} className="btn-edit">Edit</button>
+                <button onClick={() => handleDelete(event.id)} className="btn-delete">Delete</button>
+                </td>
+            </tr>
+            ))}
+        </tbody>
+        </table>
+    </>
+  );
+
+  // Inquiries Tab Content
+  const InquiriesContent = () => <Inquiries />;
+
+  // Analytics Tab Content (placeholder)
+  const AnalyticsContent = () => (
+    <div className="analytics-placeholder">
+      <h3>Analytics Coming Soon</h3>
+      <p>Future features will include:</p>
+      <ul>
+        <li>Total inquiries received</li>
+        <li>Events attendance tracking</li>
+        <li>Popular venues report</li>
+        <li>Booking conversion rates</li>
+      </ul>
     </div>
+  );
+
+  return (
+    <AdminLayout activeTab={activeTab} setActiveTab={setActiveTab} onLogout={onLogout}>
+      {activeTab === 'events' && <EventsContent />}
+      {activeTab === 'inquiries' && <InquiriesContent />}
+      {activeTab === 'analytics' && <AnalyticsContent />}
+    </AdminLayout>
   );
 }
 

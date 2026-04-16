@@ -133,7 +133,7 @@ function App() {
         <Route path="/" element={<PublicSite />} />
         <Route path="/admin" element={
           isLoggedIn ? 
-            <AdminDashboard /> : 
+            <AdminDashboard onLogout={() => setIsLoggedIn(false)} /> : 
             <AdminLogin onLogin={setIsLoggedIn} />
         } />
       </Routes>
