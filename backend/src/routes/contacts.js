@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models/database');
 
-// GET all contacts (for admin dashboard)
+// GET all contacts (excluding soft deleted)
 router.get('/', (req, res) => {
-  db.all(`SELECT * FROM contacts ORDER BY created_at DESC`, (err, rows) => {
+  db.all(`SELECT * FROM contacts WHERE deleted_at IS NULL ORDER BY created_at DESC`, (err, rows) => {
     if (err) {
       res.status(500).json({ error: err.message });
       return;
@@ -13,7 +13,18 @@ router.get('/', (req, res) => {
   });
 });
 
-// GET single contact by id
+// GET archived contacts (soft deleted)
+router.get('/archived', (req, res) => {
+  db.all(`SELECT * FROM contacts WHERE deleted_at IS NOT NULL ORDER BY deleted_at DESC`, (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(rows);
+  });
+});
+
+// GET single contact
 router.get('/:id', (req, res) => {
   const { id } = req.params;
   db.get(`SELECT * FROM contacts WHERE id = ?`, [id], (err, row) => {
@@ -25,7 +36,7 @@ router.get('/:id', (req, res) => {
   });
 });
 
-// POST new contact (from public form)
+// POST new contact
 router.post('/', (req, res) => {
   const { name, email, venue, preferred_date, message } = req.body;
   
@@ -39,8 +50,6 @@ router.post('/', (req, res) => {
         return;
       }
       
-      // TODO: Send auto-reply email (stubbed for now)
-      console.log(`Auto-reply would be sent to ${email}`);
       console.log(`New inquiry from ${name} at ${venue}`);
       
       res.json({ id: this.lastID, message: 'Inquiry received' });
@@ -48,7 +57,24 @@ router.post('/', (req, res) => {
   );
 });
 
-// PUT update contact status (mark as replied, etc.)
+// PUT - mark contact as read
+router.put('/:id/read', (req, res) => {
+  const { id } = req.params;
+  
+  db.run(
+    `UPDATE contacts SET read_at = CURRENT_TIMESTAMP WHERE id = ?`,
+    [id],
+    function(err) {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({ message: 'Contact marked as read' });
+    }
+  );
+});
+
+// PUT - update contact status (replied)
 router.put('/:id', (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
@@ -62,6 +88,40 @@ router.put('/:id', (req, res) => {
         return;
       }
       res.json({ message: 'Contact updated' });
+    }
+  );
+});
+
+// Soft delete (archive) a contact
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+  
+  db.run(
+    `UPDATE contacts SET deleted_at = CURRENT_TIMESTAMP WHERE id = ?`,
+    [id],
+    function(err) {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({ message: 'Contact archived' });
+    }
+  );
+});
+
+// Restore a soft deleted contact
+router.put('/:id/restore', (req, res) => {
+  const { id } = req.params;
+  
+  db.run(
+    `UPDATE contacts SET deleted_at = NULL WHERE id = ?`,
+    [id],
+    function(err) {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({ message: 'Contact restored' });
     }
   );
 });

@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import './AdminLayout.css';
 
-function AdminLayout({ children, activeTab, setActiveTab, onLogout }) {
+function AdminLayout({ children, activeTab, setActiveTab, onLogout, newInquiryCount = 0 }) {
   return (
     <div className="admin-layout">
-      {/* Sidebar */}
       <aside className="admin-sidebar">
         <div className="sidebar-header">
           <div className="logo-placeholder">
@@ -30,6 +28,9 @@ function AdminLayout({ children, activeTab, setActiveTab, onLogout }) {
           >
             <i className="ri-mail-line"></i>
             <span>Inquiries</span>
+            {newInquiryCount > 0 && (
+              <span className="inquiry-badge">{newInquiryCount}</span>
+            )}
           </button>
           <button 
             className={`nav-item ${activeTab === 'analytics' ? 'active' : ''}`}
@@ -48,7 +49,6 @@ function AdminLayout({ children, activeTab, setActiveTab, onLogout }) {
         </div>
       </aside>
 
-      {/* Main Content */}
       <main className="admin-main">
         <div className="admin-main-content">
           {children}

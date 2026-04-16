@@ -20,8 +20,8 @@ db.serialize(() => {
     )
   `);
 
-  // Add contacts table after events table
-    db.run(`
+  // Add contacts table with read_at field
+  db.run(`
     CREATE TABLE IF NOT EXISTS contacts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
@@ -30,6 +30,7 @@ db.serialize(() => {
         preferred_date TEXT,
         message TEXT,
         status TEXT DEFAULT 'new',
+        read_at DATETIME,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         replied_at DATETIME
     )

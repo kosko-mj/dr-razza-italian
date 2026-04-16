@@ -1,11 +1,11 @@
-/* AdminDashboard.css - Clean White Version */
+/* AdminDashboard.css - Complete File */
 
-/* Base Layout */
+/* ===== BASE LAYOUT ===== */
 .admin-container {
   width: 100%;
 }
 
-/* Tables */
+/* ===== TABLES ===== */
 .admin-table {
   width: 100%;
   border-collapse: collapse;
@@ -37,7 +37,16 @@
   background: #FAF7F2;
 }
 
-/* Buttons - Pill Style */
+.admin-table tr.unread {
+  background: #FFF8F0;
+  font-weight: 500;
+}
+
+.admin-table tr.unread:hover {
+  background: #FFF0E0;
+}
+
+/* ===== BUTTONS ===== */
 .btn-edit, .btn-delete {
   padding: 4px 16px;
   margin: 0 4px;
@@ -73,13 +82,42 @@
   background: #1e3f1e;
 }
 
-/* Events Tab */
+.btn-archive, .btn-restore {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.btn-archive {
+  color: #888;
+}
+
+.btn-archive:hover {
+  color: #A52A2A;
+  background: rgba(165,42,42,0.1);
+}
+
+.btn-restore {
+  color: #888;
+}
+
+.btn-restore:hover {
+  color: #2D4A2D;
+  background: rgba(45,74,45,0.1);
+}
+
+/* ===== EVENTS TAB ===== */
 .events-header {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 24px;
 }
 
+/* Events Table - Actions column alignment */
 .admin-table th:last-child,
 .admin-table td:last-child {
   text-align: right;
@@ -90,7 +128,37 @@
   white-space: nowrap;
 }
 
-/* Inquiries Tab */
+/* ===== INQUIRIES TAB ===== */
+.inquiries-header {
+  margin-bottom: 24px;
+}
+
+.inquiries-tabs {
+  display: flex;
+  gap: 16px;
+  border-bottom: 1px solid #E0D5C0;
+}
+
+.inquiries-tab {
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  color: #888;
+  transition: all 0.2s;
+}
+
+.inquiries-tab.active {
+  color: #A52A2A;
+  border-bottom: 2px solid #A52A2A;
+}
+
+.inquiries-tab:hover {
+  color: #A52A2A;
+}
+
 .inquiries-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -100,6 +168,19 @@
 .inquiries-list {
   border-right: 1px solid #E0D5C0;
   padding-right: 24px;
+}
+
+/* Inquiries Table - Status and Actions columns centered */
+.inquiries-list .admin-table th:nth-child(4),
+.inquiries-list .admin-table td:nth-child(4) {
+  text-align: center;
+  width: 60px;
+}
+
+.inquiries-list .admin-table th:nth-child(5),
+.inquiries-list .admin-table td:nth-child(5) {
+  text-align: center;
+  width: 60px;
 }
 
 .inquiry-detail {
@@ -178,7 +259,7 @@
   padding: 60px 20px;
 }
 
-/* Badges */
+/* ===== BADGES ===== */
 .badge-new {
   background: #A52A2A;
   color: white;
@@ -197,7 +278,7 @@
   display: inline-block;
 }
 
-/* Analytics Placeholder */
+/* ===== ANALYTICS PLACEHOLDER ===== */
 .analytics-placeholder {
   text-align: center;
   padding: 60px 20px;
@@ -226,7 +307,7 @@
   color: #666;
 }
 
-/* Form Modal */
+/* ===== FORM MODAL ===== */
 .admin-form-modal {
   position: fixed;
   top: 0;
@@ -336,7 +417,7 @@
   color: #666;
 }
 
-/* Date Picker */
+/* ===== DATE PICKER ===== */
 .date-picker-input {
   width: 100%;
   padding: 10px 12px;

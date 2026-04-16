@@ -17,15 +17,35 @@ function AdminDashboard({ onLogout }) {
     venueAddress: '',
     menuItems: ['']
   });
+  const [newInquiryCount, setNewInquiryCount] = useState(0);
 
   useEffect(() => {
     fetchEvents();
   }, []);
 
+  useEffect(() => {
+    fetchNewInquiryCount();
+  }, []);
+
+  useEffect(() => {
+    if (activeTab === 'inquiries') {
+      fetchNewInquiryCount();
+    }
+  }, [activeTab]);
+
   const fetchEvents = () => {
     fetch('http://localhost:5000/api/events')
       .then(res => res.json())
       .then(data => setEvents(data));
+  };
+
+  const fetchNewInquiryCount = () => {
+    fetch('http://localhost:5000/api/contacts')
+      .then(res => res.json())
+      .then(data => {
+        const newCount = data.filter(inquiry => !inquiry.read_at && inquiry.status !== 'replied').length;
+        setNewInquiryCount(newCount);
+      });
   };
 
   const addMenuItem = () => {
@@ -99,7 +119,6 @@ function AdminDashboard({ onLogout }) {
     setShowForm(true);
   };
 
-  // Events Tab Content
   const EventsContent = () => (
     <>
       <div className="events-header">
@@ -192,36 +211,34 @@ function AdminDashboard({ onLogout }) {
 
       <table className="admin-table">
         <thead>
-            <tr>
+          <tr>
             <th>Date</th>
             <th>Venue</th>
             <th>Time</th>
             <th>Address</th>
             <th>Actions</th>
-            </tr>
+          </tr>
         </thead>
         <tbody>
-            {events.map(event => (
+          {events.map(event => (
             <tr key={event.id}>
-                <td>{event.date}</td>
-                <td>{event.venue}</td>
-                <td>{event.time}</td>
-                <td>{event.address}</td>
-                <td>
+              <td>{event.date}</td>
+              <td>{event.venue}</td>
+              <td>{event.time}</td>
+              <td>{event.address}</td>
+              <td>
                 <button onClick={() => handleEdit(event)} className="btn-edit">Edit</button>
                 <button onClick={() => handleDelete(event.id)} className="btn-delete">Delete</button>
-                </td>
+              </td>
             </tr>
-            ))}
+          ))}
         </tbody>
-        </table>
+      </table>
     </>
   );
 
-  // Inquiries Tab Content
-  const InquiriesContent = () => <Inquiries />;
+  const InquiriesContent = () => <Inquiries onReply={fetchNewInquiryCount} onMarkRead={fetchNewInquiryCount} />;
 
-  // Analytics Tab Content (placeholder)
   const AnalyticsContent = () => (
     <div className="analytics-placeholder">
       <h3>Analytics Coming Soon</h3>
@@ -236,7 +253,12 @@ function AdminDashboard({ onLogout }) {
   );
 
   return (
-    <AdminLayout activeTab={activeTab} setActiveTab={setActiveTab} onLogout={onLogout}>
+    <AdminLayout 
+      activeTab={activeTab} 
+      setActiveTab={setActiveTab} 
+      onLogout={onLogout}
+      newInquiryCount={newInquiryCount}
+    >
       {activeTab === 'events' && <EventsContent />}
       {activeTab === 'inquiries' && <InquiriesContent />}
       {activeTab === 'analytics' && <AnalyticsContent />}
