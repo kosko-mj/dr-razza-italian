@@ -1,0 +1,124 @@
+/* AdminLogin.css - Complete File */
+
+/* Login Page Container */
+.admin-login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F9F2E0;
+  padding: 20px;
+}
+
+/* Login Card */
+.admin-login-card {
+  background: white;
+  border-radius: 16px;
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  text-align: center;
+  border-top: 4px solid #A52A2A;
+}
+
+/* Brand Section */
+.admin-login-brand {
+  margin-bottom: 32px;
+}
+
+.admin-login-brand h1 {
+  font-family: 'Abril Fatface', serif;
+  font-size: 28px;
+  color: #A52A2A;
+  margin: 0 0 8px 0;
+  letter-spacing: 1px;
+}
+
+.admin-login-brand p {
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  color: #888;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* Login Form */
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Input Groups */
+.login-input-group {
+  text-align: left;
+}
+
+.login-input-group label {
+  display: block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #A52A2A;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.login-input-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #E0D5C0;
+  border-radius: 4px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 14px;
+  transition: all 0.2s;
+  background: white;
+}
+
+.login-input-group input:focus {
+  outline: none;
+  border-color: #A52A2A;
+  box-shadow: 0 0 0 2px rgba(165,42,42,0.05);
+}
+
+/* Login Button */
+.login-btn {
+  background: #A52A2A;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 40px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 8px;
+}
+
+.login-btn:hover {
+  background: #7A1F1F;
+}
+
+/* Error Message */
+.login-error {
+  color: #A52A2A;
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .admin-login-card {
+    padding: 32px 24px;
+  }
+  
+  .admin-login-brand h1 {
+    font-size: 24px;
+  }
+}
